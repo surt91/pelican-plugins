@@ -91,9 +91,6 @@
 [submodule "md-metayaml"]
 	path = md-metayaml
 	url = https://github.com/joachimneu/pelican-md-metayaml
-[submodule "category_order"]
-	path = category_order
-	url = https://github.com/jhshi/pelican.plugins.category_order.git
 [submodule "ga_page_view"]
 	path = ga_page_view
 	url = https://github.com/jhshi/pelican.plugins.ga_page_view.git
