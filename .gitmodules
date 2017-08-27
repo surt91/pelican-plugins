@@ -1,6 +1,3 @@
 [submodule "pelican-fontawesome"]
 	path = pelican-fontawesome
 	url = https://github.com/kura/pelican-fontawesome.git
-[submodule "replacer"]
-	path = replacer
-	url = https://github.com/narusemotoki/replacer
