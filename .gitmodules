@@ -79,9 +79,6 @@
 [submodule "pelican-cite"]
 	path = pelican-cite
 	url = https://github.com/cmacmackin/pelican-cite.git
-[submodule "figure-ref"]
-	path = figure-ref
-	url = https://github.com/cmacmackin/figure-ref
 [submodule "md-metayaml"]
 	path = md-metayaml
 	url = https://github.com/joachimneu/pelican-md-metayaml
