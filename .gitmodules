@@ -31,9 +31,6 @@
 [submodule "pelican-page-hierarchy"]
 	path = pelican-page-hierarchy
 	url = https://github.com/akhayyat/pelican-page-hierarchy.git
-[submodule "multi_neighbors"]
-	path = multi_neighbors
-	url = https://github.com/davidlesieur/multi_neighbors.git
 [submodule "pelican-langcategory"]
 	path = pelican-langcategory
 	url = https://github.com/CNBorn/pelican-langcategory.git
