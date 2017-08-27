@@ -58,9 +58,6 @@
 [submodule "pelican-toc"]
 	path = pelican-toc
 	url = https://github.com/ingwinlu/pelican-toc
-[submodule "multimarkdown_reader"]
-	path = multimarkdown_reader
-	url = https://github.com/dames57/multimarkdown_reader.git
 [submodule "pelican_javascript"]
 	path = pelican_javascript
 	url = https://github.com/mortada/pelican_javascript.git
