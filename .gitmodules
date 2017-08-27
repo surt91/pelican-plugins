@@ -67,6 +67,3 @@
 [submodule "pelican-ipynb"]
 	path = pelican-ipynb
 	url = https://github.com/danielfrg/pelican-ipynb
-[submodule "pelican-ert"]
-	path = pelican-ert
-	url = https://github.com/nogaems/pelican-ert.git
