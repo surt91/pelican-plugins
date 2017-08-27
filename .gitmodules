@@ -49,6 +49,3 @@
 [submodule "pelican-version"]
 	path = pelican-version
 	url = https://github.com/Shaked/pelican-version
-[submodule "pelican-ipynb"]
-	path = pelican-ipynb
-	url = https://github.com/danielfrg/pelican-ipynb
