@@ -34,9 +34,6 @@
 [submodule "pelican-toc"]
 	path = pelican-toc
 	url = https://github.com/ingwinlu/pelican-toc
-[submodule "pelican_javascript"]
-	path = pelican_javascript
-	url = https://github.com/mortada/pelican_javascript.git
 [submodule "post_revision"]
 	path = post_revision
 	url = https://github.com/jhshi/pelican.plugins.post_revision
