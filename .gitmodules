@@ -31,9 +31,6 @@
 [submodule "pelican-jinja2content"]
 	path = pelican-jinja2content
 	url = https://github.com/joachimneu/pelican-jinja2content.git
-[submodule "pelican-genealogy"]
-	path = pelican-genealogy
-	url = https://github.com/zappala/pelican-genealogy
 [submodule "pelican-open_graph"]
 	path = pelican-open_graph
 	url = https://github.com/whiskyechobravo/pelican-open_graph.git
