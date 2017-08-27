@@ -13,9 +13,6 @@
 [submodule "pelicanthemes-generator"]
 	path = pelicanthemes-generator
 	url = https://github.com/badele/pelicanthemes-generator
-[submodule "pelican-page-order"]
-	path = pelican-page-order
-	url = https://github.com/akhayyat/pelican-page-order.git
 [submodule "replacer"]
 	path = replacer
 	url = https://github.com/narusemotoki/replacer
