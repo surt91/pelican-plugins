@@ -73,9 +73,6 @@
 [submodule "pelican-cite"]
 	path = pelican-cite
 	url = https://github.com/cmacmackin/pelican-cite.git
-[submodule "md-metayaml"]
-	path = md-metayaml
-	url = https://github.com/joachimneu/pelican-md-metayaml
 [submodule "post_revision"]
 	path = post_revision
 	url = https://github.com/jhshi/pelican.plugins.post_revision
