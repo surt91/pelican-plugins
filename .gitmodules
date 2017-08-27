@@ -82,9 +82,6 @@
 [submodule "figure-ref"]
 	path = figure-ref
 	url = https://github.com/cmacmackin/figure-ref
-[submodule "encrypt-content"]
-	path = encrypt-content
-	url = https://github.com/mindcruzer/pelican-encrypt-content
 [submodule "md-metayaml"]
 	path = md-metayaml
 	url = https://github.com/joachimneu/pelican-md-metayaml
