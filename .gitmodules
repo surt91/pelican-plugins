@@ -4,6 +4,3 @@
 [submodule "replacer"]
 	path = replacer
 	url = https://github.com/narusemotoki/replacer
-[submodule "post_revision"]
-	path = post_revision
-	url = https://github.com/jhshi/pelican.plugins.post_revision
