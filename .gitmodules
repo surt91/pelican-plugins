@@ -82,9 +82,6 @@
 [submodule "md-metayaml"]
 	path = md-metayaml
 	url = https://github.com/joachimneu/pelican-md-metayaml
-[submodule "ga_page_view"]
-	path = ga_page_view
-	url = https://github.com/jhshi/pelican.plugins.ga_page_view.git
 [submodule "post_revision"]
 	path = post_revision
 	url = https://github.com/jhshi/pelican.plugins.post_revision
