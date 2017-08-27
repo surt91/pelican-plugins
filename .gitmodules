@@ -85,9 +85,6 @@
 [submodule "linkclass"]
 	path = pelican-linkclass
 	url = https://github.com/rlaboiss/pelican-linkclass
-[submodule "just_table"]
-	path = just_table
-	url = https://github.com/burakkose/just_table
 [submodule "mboxreader"]
 	path = pelican-mboxreader
 	url = https://github.com/TC01/pelican-mboxreader
