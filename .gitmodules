@@ -1,9 +1,6 @@
 [submodule "pelican-fontawesome"]
 	path = pelican-fontawesome
 	url = https://github.com/kura/pelican-fontawesome.git
-[submodule "pin_to_top"]
-	path = pin_to_top
-	url = https://github.com/Shaked/pin_to_top.git
 [submodule "replacer"]
 	path = replacer
 	url = https://github.com/narusemotoki/replacer
