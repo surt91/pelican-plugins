@@ -31,9 +31,6 @@
 [submodule "post_revision"]
 	path = post_revision
 	url = https://github.com/jhshi/pelican.plugins.post_revision
-[submodule "mboxreader"]
-	path = pelican-mboxreader
-	url = https://github.com/TC01/pelican-mboxreader
 [submodule "pelican-version"]
 	path = pelican-version
 	url = https://github.com/Shaked/pelican-version
