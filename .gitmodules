@@ -16,9 +16,6 @@
 [submodule "pelican-page-order"]
 	path = pelican-page-order
 	url = https://github.com/akhayyat/pelican-page-order.git
-[submodule "pelican-page-hierarchy"]
-	path = pelican-page-hierarchy
-	url = https://github.com/akhayyat/pelican-page-hierarchy.git
 [submodule "replacer"]
 	path = replacer
 	url = https://github.com/narusemotoki/replacer
