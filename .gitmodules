@@ -16,6 +16,3 @@
 [submodule "post_revision"]
 	path = post_revision
 	url = https://github.com/jhshi/pelican.plugins.post_revision
-[submodule "pelican-version"]
-	path = pelican-version
-	url = https://github.com/Shaked/pelican-version
