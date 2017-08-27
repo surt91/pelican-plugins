@@ -19,9 +19,6 @@
 [submodule "pelican-page-hierarchy"]
 	path = pelican-page-hierarchy
 	url = https://github.com/akhayyat/pelican-page-hierarchy.git
-[submodule "pelican-langcategory"]
-	path = pelican-langcategory
-	url = https://github.com/CNBorn/pelican-langcategory.git
 [submodule "pelican-open_graph"]
 	path = pelican-open_graph
 	url = https://github.com/whiskyechobravo/pelican-open_graph.git
