@@ -66,7 +66,7 @@ def replace_images(f, settings):
         new_img["alt"] = image_alt
 
         placeholder = soup.new_tag("div")
-        placeholder["style"] = "padding-bottom: 200px;"
+        placeholder["style"] = "padding-bottom: 0px;"
 
         div_tag.append(new_img)
         div_tag.append(placeholder)
