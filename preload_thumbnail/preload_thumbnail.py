@@ -81,7 +81,7 @@ def create_thumbnail(infile, outfile):
     os.makedirs(path, exist_ok=True)
 
     # take for gif only first frame
-    cmd = ["convert", infile+"[0]", "-scale", "50x50", outfile]
+    cmd = ["convert", infile+"[0]", "-scale", "42x42", "-quality", "30", outfile]
 
     if not os.path.exists(outfile) or \
             os.path.getmtime(infile) > os.path.getmtime(outfile):
