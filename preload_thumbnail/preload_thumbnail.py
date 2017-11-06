@@ -5,15 +5,14 @@
 
 import os
 from subprocess import call
-import collections
+import logging
+import base64
 
 from bs4 import BeautifulSoup
 from pelican import signals
 
 
-Path = collections.namedtuple(
-    'Path', ['base_url', 'source', 'base_path', 'filename', 'process_dir']
-)
+logger = logging.getLogger(__name__)
 
 
 def start_postprocess(path, context):
@@ -39,15 +38,12 @@ def replace_images(f, settings):
         for f in settings['filenames']:
             if os.path.basename(img['src']) in f:
                 image_local = settings['filenames'][f].source_path
-                thumbnail_local = image_local.split("/")[-1]
-                thumbnail_local = thumbnail_local[:thumbnail_local.rfind(".")] + ".jpg"
-                thumbnail_url = os.path.join(url_path, process_dir, thumbnail_local)
+                basename = image_local.split("/")[-1]
+                thumbnail_local = basename[:basename.rfind(".")] + ".jpg"
                 thumbnail_local = os.path.join(settings['OUTPUT_PATH'], os.path.dirname(settings['filenames'][f].save_as), process_dir, thumbnail_local)
                 break
         else:
-            thumbnail_local = image_source + ".thumb"
-            image_local = image_source
-            thumbnail_url = image_source + ".thumb"
+            continue
 
         image_class = img.get("class", [])
         image_alt = img.get("alt", "")
@@ -60,18 +56,17 @@ def replace_images(f, settings):
 
         noscript.insert_after(div_tag)
 
+        create_thumbnail(image_local, thumbnail_local)
+        data_url = "data:image/jpeg;base64," + base64.b64encode(open(thumbnail_local, "rb").read()).decode("utf-8")
+
+        logger.info("Convert {} -> {}B preview".format(basename, len(data_url)))
+
         new_img = soup.new_tag("img")
-        new_img["src"] = thumbnail_url
+        new_img["src"] = data_url
         new_img["class"] = image_class + ["img-small"]
         new_img["alt"] = image_alt
 
-        placeholder = soup.new_tag("div")
-        placeholder["style"] = "padding-bottom: 0px;"
-
         div_tag.append(new_img)
-        div_tag.append(placeholder)
-
-        create_thumbnail(image_local, thumbnail_local)
 
     return str(soup)
 
@@ -81,7 +76,7 @@ def create_thumbnail(infile, outfile):
     os.makedirs(path, exist_ok=True)
 
     # take for gif only first frame
-    cmd = ["convert", infile+"[0]", "-scale", "42x42", "-quality", "30", outfile]
+    cmd = ["convert", infile + "[0]", "-scale", "42x42", "-quality", "30", outfile]
 
     if not os.path.exists(outfile) or \
             os.path.getmtime(infile) > os.path.getmtime(outfile):
