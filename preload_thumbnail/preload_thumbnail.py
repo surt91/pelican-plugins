@@ -51,7 +51,7 @@ def replace_images(f, settings):
         noscript = img.wrap(soup.new_tag("noscript"))
 
         div_tag = soup.new_tag("div")
-        div_tag["class"] = "placeholder"
+        div_tag["class"] = image_class + ["placeholder"]
         div_tag["data-large"] = image_source
 
         noscript.insert_after(div_tag)
@@ -65,8 +65,13 @@ def replace_images(f, settings):
 
         new_img = soup.new_tag("img")
         new_img["src"] = data_url
-        new_img["class"] = image_class + ["img-small"]
+        new_img["class"] = "img-small"
         new_img["alt"] = image_alt
+
+        img_width, img_height = get_image_size(image_local)
+        if "icon" not in image_class:
+            new_img["width"] = img_width
+            new_img["height"] = img_height
 
         div_tag.append(new_img)
 
@@ -95,6 +100,14 @@ def get_dominant_color(image_file):
     g = rgb[2:4]
     b = rgb[4:6]
     return "#{}{}{}".format(r, g, b)
+
+
+def get_image_size(image_file):
+    out = check_output(["convert", image_file, "-print", "%wx%h", "/dev/null"]).decode("utf-8")
+    w, h = out.split("x")
+    w, h = int(w), int(h)
+
+    return w, h
 
 
 def register():
