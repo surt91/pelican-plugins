@@ -7,6 +7,7 @@ import os
 from subprocess import call, check_output
 import logging
 import base64
+import json
 
 from bs4 import BeautifulSoup
 from pelican import signals
@@ -68,7 +69,8 @@ def replace_images(f, settings):
         new_img["class"] = "img-small"
         new_img["alt"] = image_alt
 
-        img_width, img_height = get_image_size(image_local)
+        # the information of the original image is saved under the thumbnail
+        img_width, img_height = get_image_size(thumbnail_local)
         if "icon" not in image_class:
             new_img["width"] = img_width
             new_img["height"] = img_height
@@ -79,35 +81,52 @@ def replace_images(f, settings):
 
 
 def create_thumbnail(infile, outfile):
-    path, _ = os.path.split(outfile)
-    os.makedirs(path, exist_ok=True)
-
-    # take for gif only first frame
-    cmd = ["convert", infile + "[0]", "-scale", "42x42", "-quality", "30", outfile]
-
     if not os.path.exists(outfile) or \
             os.path.getmtime(infile) > os.path.getmtime(outfile):
-        print(" ".join(cmd))
+        path, _ = os.path.split(outfile)
+        os.makedirs(path, exist_ok=True)
+
+        # take for gif only first frame
+        cmd = ["convert", infile + "[0]", "-scale", "42x42", "-quality", "30", outfile]
         call(cmd)
+
+        obj = {}
+        obj["color"] = get_dominant_color(outfile)
+        obj["width"], obj["height"] = get_image_size(infile)
+
+        with open(outfile + ".json", "w") as f:
+            json.dump(obj, f)
 
 
 def get_dominant_color(image_file):
-    out = check_output(["convert", image_file, "+dither", "-colors", "5", "-define", "histogram:unique-colors=true", "-format", "%c", "histogram:info:"]).decode("utf-8")
-    lines = out.split("\n")
-    line = sorted(lines)[-1]
-    rgb = line.strip().split("#")[1]
-    r = rgb[0:2]
-    g = rgb[2:4]
-    b = rgb[4:6]
-    return "#{}{}{}".format(r, g, b)
+    try:
+        with open(image_file + ".json") as f:
+            j = json.load(f)
+            return j["color"]
+    except IOError as e:
+        print("failed:", e)
+        out = check_output(["convert", image_file, "+dither", "-colors", "5", "-define", "histogram:unique-colors=true", "-format", "%c", "histogram:info:"]).decode("utf-8")
+        lines = out.split("\n")
+        line = sorted(lines)[-1]
+        rgb = line.strip().split("#")[1]
+        r = rgb[0:2]
+        g = rgb[2:4]
+        b = rgb[4:6]
+        return "#{}{}{}".format(r, g, b)
 
 
 def get_image_size(image_file):
-    out = check_output(["convert", image_file, "-print", "%wx%h", "/dev/null"]).decode("utf-8")
-    w, h = out.split("x")
-    w, h = int(w), int(h)
+    try:
+        with open(image_file + ".json") as f:
+            j = json.load(f)
+            return j["width"], j["height"]
+    except IOError as e:
+        print("failed:", e)
+        out = check_output(["convert", image_file, "-print", "%wx%h", "/dev/null"]).decode("utf-8")
+        w, h = out.split("x")
+        w, h = int(w), int(h)
 
-    return w, h
+        return w, h
 
 
 def register():
