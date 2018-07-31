@@ -41,7 +41,12 @@ def replace_images(f, settings):
                 image_local = settings['filenames'][f].source_path
                 basename = image_local.split("/")[-1]
                 thumbnail_local = basename[:basename.rfind(".")] + ".jpg"
-                thumbnail_local = os.path.join(settings['OUTPUT_PATH'], os.path.dirname(settings['filenames'][f].save_as), process_dir, thumbnail_local)
+                thumbnail_local = os.path.join(
+                    settings['OUTPUT_PATH'],
+                    os.path.dirname(settings['filenames'][f].save_as),
+                    process_dir,
+                    thumbnail_local
+                )
                 break
         else:
             continue
@@ -88,6 +93,7 @@ def create_thumbnail(infile, outfile):
 
         # take for gif only first frame
         cmd = ["convert", infile + "[0]", "-scale", "42x42", "-quality", "30", outfile]
+        # print(" ".join(cmd))
         call(cmd)
 
         obj = {}
@@ -104,7 +110,7 @@ def get_dominant_color(image_file):
             j = json.load(f)
             return j["color"]
     except IOError as e:
-        print("failed:", e)
+        # print("failed:", e)
         out = check_output(["convert", image_file, "+dither", "-colors", "5", "-define", "histogram:unique-colors=true", "-format", "%c", "histogram:info:"]).decode("utf-8")
         lines = out.split("\n")
         line = sorted(lines)[-1]
@@ -121,7 +127,7 @@ def get_image_size(image_file):
             j = json.load(f)
             return j["width"], j["height"]
     except IOError as e:
-        print("failed:", e)
+        # print("failed:", e)
         out = check_output(["convert", image_file, "-print", "%wx%h", "/dev/null"]).decode("utf-8")
         w, h = out.split("x")
         w, h = int(w), int(h)
