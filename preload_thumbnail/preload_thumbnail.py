@@ -36,14 +36,14 @@ def replace_images(f, settings):
         image_source = img["src"]
         url_path, filename = os.path.split(image_source)
 
-        for f in settings['filenames']:
+        for f in settings['generated_content']:
             if os.path.basename(img['src']) in f:
-                image_local = settings['filenames'][f].source_path
+                image_local = settings['generated_content'][f].source_path
                 basename = image_local.split("/")[-1]
                 thumbnail_local = basename[:basename.rfind(".")] + ".jpg"
                 thumbnail_local = os.path.join(
                     settings['OUTPUT_PATH'],
-                    os.path.dirname(settings['filenames'][f].save_as),
+                    os.path.dirname(settings['generated_content'][f].save_as),
                     process_dir,
                     thumbnail_local
                 )
