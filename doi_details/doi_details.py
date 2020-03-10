@@ -162,6 +162,8 @@ def preprint_list(peli):
             "title": arxiv_data["title"],
             "year": arxiv_data["year"],
             "authors": arxiv_data["authors"],
+            "related": pub.get("related", None),
+            "supplementary": pub.get("supplementary", None),
         }
 
         peli.settings["preprint_details"].append(pre_info)
