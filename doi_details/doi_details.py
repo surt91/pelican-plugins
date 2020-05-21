@@ -17,7 +17,12 @@ def doi2json(doi):
     # -LH "Accept: application/vnd.citationstyles.csl+json" https://doi.org/10.1103/PhysRevE.96.062101
     url = 'https://doi.org/{}'.format(doi)
     r = requests.get(url, headers={'Accept': 'application/vnd.citationstyles.csl+json'})
-    json = r.json()
+
+    try:
+        json = r.json()
+    except:
+        print("error for doi", doi, ":", r)
+        json = {}
 
     return json
 
@@ -60,7 +65,7 @@ def arxiv2json(arxiv):
         "title": title,
         "year": year,
         "authors": authors,
-        "long": long
+        "long": long,
     }
 
     return data
