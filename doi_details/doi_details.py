@@ -125,6 +125,7 @@ def publication_list(peli):
         pub_info = {
             "doi": doi,
             "arxiv": arxiv,
+            "comment": pub.get("comment", None),
             "related": pub.get("related", None),
             "supplementary": pub.get("supplementary", None),
             "arxiv_long": arxiv_long,
