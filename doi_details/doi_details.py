@@ -9,14 +9,22 @@ from time import sleep
 from xml.etree import ElementTree
 
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 from pelican import signals
+
+
+http = requests.Session()
+retries = Retry(total=5, backoff_factor=2, status_forcelist=[429, 500, 502, 503, 504])
+http.mount("https://", HTTPAdapter(max_retries=retries))
 
 
 def doi2json(doi):
     # -LH "Accept: application/vnd.citationstyles.csl+json" https://doi.org/10.1103/PhysRevE.96.062101
     url = 'https://doi.org/{}'.format(doi)
-    r = requests.get(url, headers={'Accept': 'application/vnd.citationstyles.csl+json'})
+
+    r = http.get(url, headers={'Accept': 'application/vnd.citationstyles.csl+json'})
 
     try:
         json = r.json()
@@ -35,7 +43,7 @@ def arxiv2json(arxiv):
     # https://export.arxiv.org/api/query?id_list=1512.08554
     url = 'https://export.arxiv.org/api/query?id_list={}'.format(arxiv)
 
-    r = requests.get(url)
+    r = http.get(url)
     root = ElementTree.fromstring(r.content)
 
     for child in root:
